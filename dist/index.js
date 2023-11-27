@@ -9859,15 +9859,20 @@ class TrelloClient {
             const options = Object.assign(Object.assign({}, this.apiBaseHeaders), { method: 'POST' });
             const queryParams = new URLSearchParams();
             queryParams.append('url', attachmentUrl);
+            const url = this.buildApiUrl(path, queryParams);
+            core.info(url);
+            core.info(JSON.stringify(options));
             return (0, node_fetch_1.default)(this.buildApiUrl(path, queryParams), options)
                 .then((response) => __awaiter(this, void 0, void 0, function* () {
+                core.info(JSON.stringify(response));
                 if (!response.ok) {
                     throw new Error((0, errors_1.ERR_CARD_ATTACHMENT_POST_API)(response.status));
                 }
                 return (yield response.json());
             }))
                 .catch((error) => {
-                console.log(error);
+                core.info(error);
+                console.log(JSON.stringify(error));
                 return error;
             });
         });

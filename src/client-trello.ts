@@ -119,6 +119,9 @@ class TrelloClient implements TrelloClientI {
     const queryParams = new URLSearchParams();
     queryParams.append('url', attachmentUrl);
 
+    const url = this.buildApiUrl(path, queryParams);
+    core.info(url);
+    core.info(JSON.stringify(options));
     return fetch(this.buildApiUrl(path, queryParams), options as RequestInit)
       .then(async (response) => {
         core.info(JSON.stringify(response));

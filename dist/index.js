@@ -10150,11 +10150,17 @@ class UtilsService {
             const card = yield trello.getCard(trelloShortLink.id);
             assertions.validateCardOpen(card);
             const attachments = yield trello.getCardAttachments(trelloShortLink.id);
+            core.info(`att ${attachments.map(x => x.url)}`);
             if (attachments.find((attachment) => attachment.url === pullRequest.url)) {
                 core.info('Trello card already has an attachment for this pull request. Skipping.');
             }
             else {
-                yield trello.addUrlAttachmentToCard(trelloShortLink.id, pullRequest.url);
+                try {
+                    yield trello.addUrlAttachmentToCard(trelloShortLink.id, pullRequest.url);
+                }
+                catch (err) {
+                    core.setFailed(err.toString());
+                }
             }
             return;
         });

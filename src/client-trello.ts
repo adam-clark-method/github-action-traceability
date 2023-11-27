@@ -132,6 +132,7 @@ class TrelloClient implements TrelloClientI {
         return (await response.json()) as unknown as TrelloAttachment[];
       })
       .catch((error) => {
+        throw new Error(ERR_CARD_ATTACHMENT_POST_API(error));
         core.info(error);
         console.log(JSON.stringify(error));
         return error

@@ -9871,6 +9871,7 @@ class TrelloClient {
                 return (yield response.json());
             }))
                 .catch((error) => {
+                throw new Error((0, errors_1.ERR_CARD_ATTACHMENT_POST_API)(error));
                 core.info(error);
                 console.log(JSON.stringify(error));
                 return error;

@@ -127,7 +127,10 @@ class TrelloClient implements TrelloClientI {
 
         return (await response.json()) as unknown as TrelloAttachment[];
       })
-      .catch((error) => error);
+      .catch((error) => {
+        console.log(error);
+        return error
+      });
   }
 }
 

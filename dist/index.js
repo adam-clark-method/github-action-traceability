@@ -9866,7 +9866,10 @@ class TrelloClient {
                 }
                 return (yield response.json());
             }))
-                .catch((error) => error);
+                .catch((error) => {
+                console.log(error);
+                return error;
+            });
         });
     }
 }

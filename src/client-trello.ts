@@ -121,6 +121,7 @@ class TrelloClient implements TrelloClientI {
 
     return fetch(this.buildApiUrl(path, queryParams), options as RequestInit)
       .then(async (response) => {
+        core.info(JSON.stringify(response));
         if (!response.ok) {
           throw new Error(ERR_CARD_ATTACHMENT_POST_API(response.status));
         }
@@ -128,7 +129,8 @@ class TrelloClient implements TrelloClientI {
         return (await response.json()) as unknown as TrelloAttachment[];
       })
       .catch((error) => {
-        console.log(error);
+        core.info(error);
+        console.log(JSON.stringify(error));
         return error
       });
   }

@@ -9811,6 +9811,8 @@ class TrelloClient {
     // https://developer.atlassian.com/cloud/trello/guides/rest-api/authorization/#authorizing-a-client
     buildApiUrl(path, query) {
         const params = query ? query : new URLSearchParams();
+        core.info(this.apiKey);
+        core.info(this.apiToken);
         params.append('key', this.apiKey);
         params.append('token', this.apiToken);
         return `https://api.trello.com/1${path}?${params.toString()}`;

@@ -63,6 +63,8 @@ class TrelloClient implements TrelloClientI {
   private buildApiUrl(path: string, query?: URLSearchParams): string {
     const params = query ? query : new URLSearchParams();
 
+    core.info(this.apiKey);
+    core.info(this.apiToken);
     params.append('key', this.apiKey);
     params.append('token', this.apiToken);
 

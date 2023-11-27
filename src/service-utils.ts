@@ -72,6 +72,7 @@ class UtilsService {
     assertions.validateCardOpen(card);
 
     const attachments = await trello.getCardAttachments(trelloShortLink.id);
+    console.log('att', attachments.map(x => x.url));
     if (attachments.find((attachment) => attachment.url === pullRequest.url)) {
       core.info('Trello card already has an attachment for this pull request. Skipping.');
     } else {
